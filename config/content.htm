@@ -146,11 +146,11 @@ var viewer3d;
 </p>
 <h2>Base Plate</h2>
 <p></p>
+<script src="/static/jsc3d.js" type="text/javascript"></script>
 <!-- 模型連結 -->
 <div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_part2-1.stl">模型1</a> <!-- 第一題的模型 --></div>
 <!-- 動態生成的模型部分 -->
 <div id="modelParts1"></div>
-<p>
 <script type="text/javascript">
 // 函數用來動態生成模型部件
 function createModelPart(index, url, ytUrl, title) {
@@ -232,7 +232,7 @@ function createModelPart(index, url, ytUrl, title) {
 function initModelParts() {
     var links = document.querySelectorAll('#modelLinks1 a');
     var ytLinks = [
-        'https://www.youtube.com/watch?v=KnZUK0JmUB8', // 第一題的影片
+        'https://www.youtube.com/embed/KnZUK0JmUB8', // 第一題的影片
     ];
     
     var titles = ['Base Plate']; // 題目標題
@@ -243,8 +243,7 @@ function initModelParts() {
 }
 
 window.onload = initModelParts;  // 頁面加載時初始化所有模型
-</script>
-</p><h1>HW1</h1>
+</script><h1>HW1</h1>
 <p>Homework 1 (10%):</p>
 <p></p>
 <p style="padding-left: 30px;">利用 Solvespace 與 NX2312 建立<span> </span><a href="https://mde.tw/cad2024/content/Parts.html">Parts</a><span> </span>頁面中的零件</p>

@@ -228,6 +228,12 @@ function createModelPart(index, url, ytUrl, title) {
 
     window[`openByGet${index}`]();  // 加載模型
 }
+
+function initModelParts() {
+    var links = document.querySelectorAll('#modelLinks1 a');
+    var ytLinks = [
+        'https://www.youtube.com/watch?v=KnZUK0JmUB8', // 第一題的影片
+    ];
     
     var titles = ['Base Plate']; // 題目標題
     
