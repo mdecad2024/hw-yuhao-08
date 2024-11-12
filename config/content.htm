@@ -641,6 +641,106 @@ function initModelParts() {
 }
 
 window.onload = initModelParts;  // 頁面加載時初始化所有模型
+</script>
+<h2>Gland blank</h2>
+<p></p>
+<script src="/static/jsc3d.js" type="text/javascript"></script>
+<!-- 模型連結 -->
+<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_part7.stl">模型1</a> <!-- 第一題的模型 --></div>
+<!-- 動態生成的模型部分 -->
+<div id="modelParts1"></div>
+<script type="text/javascript">
+// 函數用來動態生成模型部件
+function createModelPart(index, url, ytUrl, title) {
+    var modelPartDiv = document.createElement('div');
+    modelPartDiv.innerHTML = `
+        <h3>${title}</h3> <!-- 題目標題 -->
+        <div id="models${index}">
+            <canvas height="300" id="cv${index}" style="border: 1px solid;" width="400"></canvas>
+        </div>
+
+        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 20px;">
+            Model Color:<input id="mdlClr${index}" onchange="changeOption${index}('ModelColor',this.value)" style="margin-right: 50px;" type="color" value="#00ff40">
+            Back Color1:<input id="bckClr${index}_1" onchange="changeOption${index}('BackgroundColor1',this.value)" style="margin-right: 50px;" type="color">
+            Back Color2:<input id="bckClr${index}_2" onchange="changeOption${index}('BackgroundColor2',this.value)" type="color"><br>
+            Render Mode:<select id="render${index}" onchange="changeOption${index}('RenderMode',this.value)">
+                <option>Flat</option>
+                <option>Point</option>
+                <option>Wireframe</option>
+                <option>Smooth</option>
+            </select>
+            Definition:<select id="defini${index}" onchange="changeOption${index}('Definition',this.value)">
+                <option>Standard</option>
+                <option>low</option>
+                <option>high</option>
+            </select>
+        </div>
+        
+        <div id="videoPlaceholder${index}" style="margin-bottom: 20px;">
+            <iframe width="560" height="315" src="${ytUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    `;
+    document.getElementById('modelParts1').appendChild(modelPartDiv);
+
+    // 初始化觀察者和選項
+    window[`viewer${index}`] = null;
+
+    // 獲取選項的函數
+    window[`getOptions${index}`] = function() {
+        var mc = document.getElementById(`mdlClr${index}`).value;
+        var bc1 = document.getElementById(`bckClr${index}_1`).value;
+        var bc2 = document.getElementById(`bckClr${index}_2`).value;
+        var ren = document.getElementById(`render${index}`).value;
+        var def = document.getElementById(`defini${index}`).value;
+        return {ModelColor: mc, BackgroundColor1: bc1, BackgroundColor2: bc2, RenderMode: ren, Definition: def};
+    };
+
+    window[`readSTLfile${index}`] = function(opt, canvasId) {
+        var canvas = document.getElementById(canvasId);
+        window[`viewer${index}`] = new JSC3D.Viewer(canvas);
+        window[`viewer${index}`].setParameter('SceneUrl', opt.SceneUrl);
+        window[`viewer${index}`].setParameter('InitRotationX', 0);
+        window[`viewer${index}`].setParameter('InitRotationY', 0);
+        window[`viewer${index}`].setParameter('InitRotationZ', 0);
+        window[`viewer${index}`].setParameter('ModelColor', opt.ModelColor);
+        window[`viewer${index}`].setParameter('BackgroundColor1', opt.BackgroundColor1);
+        window[`viewer${index}`].setParameter('BackgroundColor2', opt.BackgroundColor2);
+        window[`viewer${index}`].setParameter('RenderMode', opt.RenderMode);
+        window[`viewer${index}`].setParameter('Definition', opt.Definition);
+        window[`viewer${index}`].init();
+        window[`viewer${index}`].update();
+    };
+
+    window[`changeOption${index}`] = function(strOpt, strValue) {
+        console.log(`PART ${index} change ` + strOpt + " to " + strValue);
+        window[`viewer${index}`].setParameter(strOpt, strValue);
+        window[`viewer${index}`].init();
+        window[`viewer${index}`].update();
+    };
+
+    window[`openByGet${index}`] = function() {
+        var opt = window[`getOptions${index}`]();
+        opt.SceneUrl = url;
+        window[`readSTLfile${index}`](opt, `cv${index}`);
+    };
+
+    window[`openByGet${index}`]();  // 加載模型
+}
+
+function initModelParts() {
+    var links = document.querySelectorAll('#modelLinks1 a');
+    var ytLinks = [
+        'https://www.youtube.com/embed/byuGshn9T-4', // 第一題的影片
+    ];
+    
+    var titles = ['Gland blank']; // 題目標題
+    
+    links.forEach(function(link, index) {
+        createModelPart(index + 1, link.href, ytLinks[index % ytLinks.length], titles[index]); // 將標題傳遞進去
+    });
+}
+
+window.onload = initModelParts;  // 頁面加載時初始化所有模型
 </script><h1>HW1</h1>
 <p>Homework 1 (10%):</p>
 <p></p>
