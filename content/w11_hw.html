@@ -144,79 +144,71 @@ img.add_border {
     <div id="tipue_search_content">w9 << <a href='w9.html'>Previous</a> <a href='HW1.html'>Next</a> >> HW1<br /><h1>w11_hw</h1>
 <p>ZIP檔案:<a href="./../downloads/41223131_p1.zip">/downloads/41223131_p1.zip</a></p>
 <p></p>
-<p></p>
 <script src="./../cmsimde/static/jsc3d.js" type="text/javascript"></script>
-<div id="models"><canvas height="300" id="cv1" style="border: 1px solid;" width="400"></canvas> <canvas height="300" id="cv2" style="border: 1px solid;" width="400"></canvas> <!-- 可以添加更多的 canvas --></div>
-<div style="width: 400px; height: 70px; border: 1px solid;">Model Color:<input id="mdlClr" onchange="changeOption('ModelColor',this.value)" style="margin-right: 50px;" type="color" value="#00ff40"/> Back Color1:<input id="bckClr1" onchange="changeOption('BackgroundColor1',this.value)" style="margin-right: 50px;" type="color"/> Back Color2:<input id="bckClr2" onchange="changeOption('BackgroundColor2',this.value)" type="color"/><br/> Render Mode:<select id="render" onchange="changeOption('RenderMode',this.value)">
-<option>Flat</option>
-<option>Point</option>
-<option>Wireframe</option>
-<option>Smooth</option>
-</select>Definition:<select id="defini" onchange="changeOption('Definition',this.value)">
-<option>Standard</option>
-<option>low</option>
-<option>high</option>
-</select></div>
+<!-- 模型連結 -->
+<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_p1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p2.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p4.stl">模型3</a> <!-- 第三題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p5.stl">模型4</a> <!-- 第四題的模型 --></div>
+<!-- 動態生成的模型部分 -->
+<div id="modelParts1" style="display: flex; flex-wrap: wrap; justify-content: space-between;"></div>
 <script type="text/javascript">
-var viewers = [];
+function createModelPart(index, url) {
+    // 動態生成 HTML
+    const modelPartDiv = document.createElement('div');
+    modelPartDiv.className = "model-container"; // 設置類名方便管理樣式
+    modelPartDiv.style = "width: 42%; margin-bottom: 20px;"; // 減小寬度，使間距更大
 
-function getOptions(){
-    var mc = document.getElementById("mdlClr").value;
-    var bc1 = document.getElementById("bckClr1").value;
-    var bc2 = document.getElementById("bckClr2").value;
-    var ren = document.getElementById("render").value;
-    var def = document.getElementById("defini").value;
-    return {ModelColor: mc, BackgroundColor1: bc1, BackgroundColor2: bc2, RenderMode: ren, Definition: def};
-}
+    modelPartDiv.innerHTML = `
+        <div id="models${index}">
+            <canvas height="300" id="cv${index}" style="border: 1px solid;" width="400"></canvas>
+        </div>
 
-function readSTLfile(opt, canvasId){
-    var canvas = document.getElementById(canvasId);
-    var viewer = new JSC3D.Viewer(canvas);
-    viewer.setParameter('SceneUrl', opt.SceneUrl);
+        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 20px;">
+            Model Color: <input id="mdlClr${index}" type="color" value="#00ff40" style="margin-right: 50px;">
+            Back Color1: <input id="bckClr${index}_1" type="color" value="#000000" style="margin-right: 50px;">
+            Back Color2: <input id="bckClr${index}_2" type="color" value="#000000"><br>
+            Render Mode:
+            <select id="render${index}">
+                <option value="Flat">Flat</option>
+                <option value="Point">Point</option>
+                <option value="Wireframe">Wireframe</option>
+                <option value="Smooth">Smooth</option>
+            </select>
+            Definition:
+            <select id="defini${index}">
+                <option value="Standard">Standard</option>
+                <option value="low">Low</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+    `;
+    document.getElementById('modelParts1').appendChild(modelPartDiv);
+
+    // 初始化 Viewer
+    const canvas = document.getElementById(`cv${index}`);
+    const viewer = new JSC3D.Viewer(canvas);
+
+    // 設置初始參數
+    viewer.setParameter('SceneUrl', url);
     viewer.setParameter('InitRotationX', 0);
     viewer.setParameter('InitRotationY', 0);
     viewer.setParameter('InitRotationZ', 0);
-    viewer.setParameter('ModelColor', opt.ModelColor);
-    viewer.setParameter('BackgroundColor1', opt.BackgroundColor1);
-    viewer.setParameter('BackgroundColor2', opt.BackgroundColor2);
-    viewer.setParameter('RenderMode', opt.RenderMode);
-    viewer.setParameter('Definition', opt.Definition);
+    viewer.setParameter('ModelColor', '#00ff40');
+    viewer.setParameter('BackgroundColor1', '#000000');  // 背景顏色設為黑色
+    viewer.setParameter('BackgroundColor2', '#000000');  // 背景顏色設為黑色
+    viewer.setParameter('RenderMode', 'Flat');
+    viewer.setParameter('Definition', 'Standard');
     viewer.init();
     viewer.update();
-    viewers.push(viewer); // 保存 viewer 實例
 }
 
-function changeOption(strOpt,strValue){
-    console.log("change " + strOpt + " to " + strValue);
-    viewers.forEach(viewer => {
-        viewer.setParameter(strOpt, strValue);
-        viewer.init();
-        viewer.update();
+function initModelParts() {
+    const links = document.querySelectorAll('#modelLinks1 a');
+    
+    links.forEach(function(link, index) {
+        createModelPart(index + 1, link.href); // 初始化模型，順序保持一致
     });
 }
 
-function openByUrl(){
-    var url = document.getElementById("url").value;
-    var opt = getOptions();
-    opt.SceneUrl = url;
-    // 可以添加更多的 STL URL
-    readSTLfile(opt, 'cv1'); // 為每個 canvas 調用
-    readSTLfile(opt, 'cv2'); // 第二個 canvas
-}
-
-function openByGet(){
-    var urls = [
-        "https://s104.cycu.org/~41223131/41223131_p1.stl",
-        "https://s104.cycu.org/~41223131/41223131_p2.stl"
-    ];
-    var opt = getOptions();
-    urls.forEach((url, index) => {
-        opt.SceneUrl = url;
-        readSTLfile(opt, 'cv' + (index + 1)); // 動態生成 canvas ID
-    });
-}
-
-openByGet();
+window.onload = initModelParts;  // 頁面加載時初始化所有模型
 </script><br />w9 << <a href='w9.html'>Previous</a> <a href='HW1.html'>Next</a> >> HW1</div>
         
     <!-- footer -->
