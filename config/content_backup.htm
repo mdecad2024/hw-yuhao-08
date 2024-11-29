@@ -1170,13 +1170,13 @@ window.onload = initModelParts;  // 頁面加載時初始化所有模型
 <!-- 模型連結 -->
 <div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_p1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p2.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p4.stl">模型3</a> <!-- 第三題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p5.stl">模型4</a> <!-- 第四題的模型 --></div>
 <!-- 動態生成的模型部分 -->
-<div id="modelParts1" style="display: flex; flex-wrap: wrap; justify-content: space-between;"></div>
+<div id="modelParts1" style="display: flex; flex-wrap: wrap;"></div>
 <script type="text/javascript">
 function createModelPart(index, url) {
     // 動態生成 HTML
     const modelPartDiv = document.createElement('div');
     modelPartDiv.className = "model-container"; // 設置類名方便管理樣式
-    modelPartDiv.style = "width: 48%; margin-bottom: 20px; margin-right: 1.5%;"; // 設定適當的間距
+    modelPartDiv.style = "width: 49%; margin-bottom: 20px;"; // 左右排列，兩個模型佔一行，並緊密排列
 
     modelPartDiv.innerHTML = `
         <div id="models${index}">
