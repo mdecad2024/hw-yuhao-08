@@ -1168,7 +1168,7 @@ window.onload = initModelParts;  // 頁面加載時初始化所有模型
 <p></p>
 <script src="/static/jsc3d.js" type="text/javascript"></script>
 <!-- 模型連結 -->
-<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_p1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p2.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p4.stl">模型3</a> <!-- 第三題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p5.stl">模型4</a> <!-- 第四題的模型 --></div>
+<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_p1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~4122313141223131_p2.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p4.stl">模型3</a> <!-- 第三題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p5.stl">模型4</a> <!-- 第四題的模型 --></div>
 <!-- 動態生成的模型部分 -->
 <div id="modelParts1" style="display: flex; flex-wrap: wrap; justify-content: space-between;"></div>
 <script type="text/javascript">
@@ -1176,14 +1176,14 @@ function createModelPart(index, url) {
     // 動態生成 HTML
     const modelPartDiv = document.createElement('div');
     modelPartDiv.className = "model-container"; // 設置類名方便管理樣式
-    modelPartDiv.style = "width: 48%; margin-bottom: 20px; margin-right: 4%;"; // 調整間距
+    modelPartDiv.style = "width: 48%; margin-bottom: 15px; margin-right: 2%;"; // 減少間隔
 
     modelPartDiv.innerHTML = `
         <div id="models${index}">
             <canvas height="300" id="cv${index}" style="border: 1px solid;" width="400"></canvas>
         </div>
 
-        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 20px;">
+        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 15px;">
             Model Color: <input id="mdlClr${index}" type="color" value="#00ff40" style="margin-right: 50px;">
             Back Color1: <input id="bckClr${index}_1" type="color" value="#000000" style="margin-right: 50px;">
             Back Color2: <input id="bckClr${index}_2" type="color" value="#000000"><br>
