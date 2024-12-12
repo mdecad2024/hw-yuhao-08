@@ -141,85 +141,9 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w9 << <a href='w9.html'>Previous</a> <a href='W11影片連結.html'>Next</a> >> W11影片連結<br /><h1>w11_hw</h1>
-<p>同組影片網站連結:<a href="https://mdecad2024.github.io/hw-41223150/content/W11%E5%BD%B1%E7%89%87.html">41223150</a></p>
-<p>我的影片網站連結:<a href="https://mdecad2024.github.io/hw-yuhao-08/content/W11%E5%BD%B1%E7%89%87%E9%80%A3%E7%B5%90.html">41223131</a></p>
-<p>零件檔下載:<a href="./../downloads/41223131_p1.zip">/downloads/41223131_p1.zip</a> (<span>Plongeur Batteur_sldprt.prt)</span></p>
-<p>               <a href="./../downloads/41223131_p2.zip">/downloads/41223131_p2.zip</a>  (<span>Piece composite_sldprt.prt)</span></p>
-<p>               <a href="./../downloads/41223150_p3.zip">/downloads/41223150_p3.zip</a>  (<span>Piece métalique gauche_sldprt.prt)</span></p>
-<p>               <a href="./../downloads/41223131_p4.zip">/downloads/41223131_p4.zip</a>  (<span>Plastique Flipper_sldprt.prt)</span></p>
-<p>               <a href="./../downloads/41223131_p5.zip">/downloads/41223131_p5.zip</a>  (<span>Support Bobine_sldprt.prt)</span></p>
-<p>               <a href="./../downloads/41223150_p6.zip">/downloads/41223150_p6.zip</a>  (<span>Platine Batteur_sldprt.prt)</span></p>
-<p>              <a href="./../downloads/41223150_p7.zip">/downloads/41223150_p7.zip</a>   (<span>Flipper_sldprt.prt)</span></p>
-<script src="./../cmsimde/static/jsc3d.js" type="text/javascript"></script>
-<!-- 模型連結 -->
-<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_p1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p2.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223150/41223150_p3.stl">模型3</a> <!-- 第三題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p4.stl">模型4</a> <!-- 第四題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_p5.stl">模型5</a> <!-- 第五題的模型 --> <a href="https://s104.cycu.org/~41223150/41223150_p6.stl">模型6</a> <!-- 第六題的模型 --> <a href="https://s104.cycu.org/~41223150/41223150_p7.stl">模型7</a> <!-- 第七題的模型 --></div>
-<!-- 動態生成的模型部分 -->
-<div id="modelParts1" style="display: flex; flex-wrap: wrap;"></div>
-<script type="text/javascript">
-function createModelPart(index, url) {
-    // 動態生成 HTML
-    const modelPartDiv = document.createElement('div');
-    modelPartDiv.className = "model-container"; // 設置類名方便管理樣式
-    modelPartDiv.style = "width: 49%; margin-bottom: 20px;"; // 左右排列，兩個模型佔一行，並緊密排列
-
-    modelPartDiv.innerHTML = `
-        <div id="models${index}">
-            <canvas height="300" id="cv${index}" style="border: 1px solid;" width="400"></canvas>
-        </div>
-
-        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 15px;">
-            Model Color: <input id="mdlClr${index}" type="color" value="#00ff40" style="margin-right: 50px;">
-            Back Color1: <input id="bckClr${index}_1" type="color" value="#000000" style="margin-right: 50px;">
-            Back Color2: <input id="bckClr${index}_2" type="color" value="#000000"><br>
-            Render Mode:
-            <select id="render${index}">
-                <option value="Flat">Flat</option>
-                <option value="Point">Point</option>
-                <option value="Wireframe">Wireframe</option>
-                <option value="Smooth">Smooth</option>
-            </select>
-            Definition:
-            <select id="defini${index}">
-                <option value="Standard">Standard</option>
-                <option value="low">Low</option>
-                <option value="high">High</option>
-            </select>
-        </div>
-    `;
-    document.getElementById('modelParts1').appendChild(modelPartDiv);
-
-    // 初始化 Viewer
-    const canvas = document.getElementById(`cv${index}`);
-    const viewer = new JSC3D.Viewer(canvas);
-
-    // 設置初始參數
-    viewer.setParameter('SceneUrl', url);
-    viewer.setParameter('InitRotationX', 0);
-    viewer.setParameter('InitRotationY', 0);
-    viewer.setParameter('InitRotationZ', 0);
-    viewer.setParameter('ModelColor', '#00ff40');
-    viewer.setParameter('BackgroundColor1', '#000000');  // 背景顏色設為黑色
-    viewer.setParameter('BackgroundColor2', '#000000');  // 背景顏色設為黑色
-    viewer.setParameter('RenderMode', 'Flat');
-    viewer.setParameter('Definition', 'Standard');
-    viewer.init();
-    viewer.update();
-}
-
-function initModelParts() {
-    const links = document.querySelectorAll('#modelLinks1 a');
-    
-    links.forEach(function(link, index) {
-        createModelPart(index + 1, link.href); // 初始化模型，順序保持一致
-    });
-}
-
-window.onload = initModelParts;  // 頁面加載時初始化所有模型
-</script>
-<p></p>
-<p></p>
-<br />w9 << <a href='w9.html'>Previous</a> <a href='W11影片連結.html'>Next</a> >> W11影片連結</div>
+    <div id="tipue_search_content">W12_ch << <a href='W12_ch.html'>Previous</a> <a href='HW1.html'>Next</a> >> HW1<br /><h1>W13</h1>
+<p>利用CoppelaSim Edu旋轉</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="351" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/2p4BjkeoMdo" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - 旋轉影片:41223131" width="666"></iframe></p><br />W12_ch << <a href='W12_ch.html'>Previous</a> <a href='HW1.html'>Next</a> >> HW1</div>
         
     <!-- footer -->
       <div class="container">
