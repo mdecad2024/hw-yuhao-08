@@ -2,7 +2,7 @@
         <head>
         <title>cad_hw</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -141,15 +141,109 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w2 << <a href='w2.html'>Previous</a> <a href='w7.html'>Next</a> >> w7<br /><h1>w3</h1>
-<p>1.填寫github帳號到excel上</p>
-<p>2.教solvespace畫圖</p>
-<p>3.分析solvespaces的功用和職場發展:</p>
-<p><span>ChatGPT:<br/>①SolveSpace 是一款開源的參數化3D CAD建模軟體，主要用於製作2D和3D的技術設計、工程建模及機械設計</span></p>
-<p><span>②</span><span>SolveSpace 在業界的應用更多聚焦於 <strong>輕量化、快速設計、教育用途和製造準備</strong>。對於需要高端功能的大型企業， 可能不夠用，但對於初創團隊、個人設計師或教育領域來說，它是一個靈活且經濟實惠的解決方案。</span></p>
-<p><span>網路(google):</span></p>
-<p><span><a href="https://blog.csdn.net/gitblog_00264/article/details/141452063">分析solvespaces的職場功用和能力</a></span></p>
-<br />w2 << <a href='w2.html'>Previous</a> <a href='w7.html'>Next</a> >> w7</div>
+    <div id="tipue_search_content">HW2_Exam << <a href='HW2_Exam.html'>Previous</a> <a href='HW3.html'>Next</a> >> HW3<br /><h1>w16_exam1</h1>
+<p><a href="./../downloads/41223131_w16_exam1.zip">零件檔案</a></p>
+<p></p>
+<script src="./../cmsimde/static/jsc3d.js" type="text/javascript"></script>
+<!-- 模型連結 -->
+<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_w16_part1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_w16_part2.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_w16_part3.stl">模型2</a> <!-- 第三題的模型 --></div>
+<!-- 動態生成的模型部分 -->
+<div id="modelParts1"></div>
+<script type="text/javascript">
+// 函數用來動態生成模型部件
+function createModelPart(index, url, ytUrl, title) {
+    var modelPartDiv = document.createElement('div');
+    modelPartDiv.innerHTML = `
+        <h3>${title}</h3> <!-- 題目標題 -->
+        <div id="models${index}">
+            <canvas height="300" id="cv${index}" style="border: 1px solid;" width="400"></canvas>
+        </div>
+
+        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 20px;">
+            Model Color:<input id="mdlClr${index}" onchange="changeOption${index}('ModelColor',this.value)" style="margin-right: 50px;" type="color" value="#00ff40">
+            Back Color1:<input id="bckClr${index}_1" onchange="changeOption${index}('BackgroundColor1',this.value)" style="margin-right: 50px;" type="color">
+            Back Color2:<input id="bckClr${index}_2" onchange="changeOption${index}('BackgroundColor2',this.value)" type="color"><br>
+            Render Mode:<select id="render${index}" onchange="changeOption${index}('RenderMode',this.value)">
+                <option>Flat</option>
+                <option>Point</option>
+                <option>Wireframe</option>
+                <option>Smooth</option>
+            </select>
+            Definition:<select id="defini${index}" onchange="changeOption${index}('Definition',this.value)">
+                <option>Standard</option>
+                <option>low</option>
+                <option>high</option>
+            </select>
+        </div>
+        
+        <div id="videoPlaceholder${index}" style="margin-bottom: 20px;">
+            <iframe width="560" height="315" src="${ytUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    `;
+    document.getElementById('modelParts1').appendChild(modelPartDiv);
+
+    // 初始化觀察者和選項
+    window[`viewer${index}`] = null;
+
+    // 獲取選項的函數
+    window[`getOptions${index}`] = function() {
+        var mc = document.getElementById(`mdlClr${index}`).value;
+        var bc1 = document.getElementById(`bckClr${index}_1`).value;
+        var bc2 = document.getElementById(`bckClr${index}_2`).value;
+        var ren = document.getElementById(`render${index}`).value;
+        var def = document.getElementById(`defini${index}`).value;
+        return {ModelColor: mc, BackgroundColor1: bc1, BackgroundColor2: bc2, RenderMode: ren, Definition: def};
+    };
+
+    window[`readSTLfile${index}`] = function(opt, canvasId) {
+        var canvas = document.getElementById(canvasId);
+        window[`viewer${index}`] = new JSC3D.Viewer(canvas);
+        window[`viewer${index}`].setParameter('SceneUrl', opt.SceneUrl);
+        window[`viewer${index}`].setParameter('InitRotationX', 0);
+        window[`viewer${index}`].setParameter('InitRotationY', 0);
+        window[`viewer${index}`].setParameter('InitRotationZ', 0);
+        window[`viewer${index}`].setParameter('ModelColor', opt.ModelColor);
+        window[`viewer${index}`].setParameter('BackgroundColor1', opt.BackgroundColor1);
+        window[`viewer${index}`].setParameter('BackgroundColor2', opt.BackgroundColor2);
+        window[`viewer${index}`].setParameter('RenderMode', opt.RenderMode);
+        window[`viewer${index}`].setParameter('Definition', opt.Definition);
+        window[`viewer${index}`].init();
+        window[`viewer${index}`].update();
+    };
+
+    window[`changeOption${index}`] = function(strOpt, strValue) {
+        console.log(`PART ${index} change ` + strOpt + " to " + strValue);
+        window[`viewer${index}`].setParameter(strOpt, strValue);
+        window[`viewer${index}`].init();
+        window[`viewer${index}`].update();
+    };
+
+    window[`openByGet${index}`] = function() {
+        var opt = window[`getOptions${index}`]();
+        opt.SceneUrl = url;
+        window[`readSTLfile${index}`](opt, `cv${index}`);
+    };
+
+    window[`openByGet${index}`]();  // 加載模型
+}
+
+function initModelParts() {
+    var links = document.querySelectorAll('#modelLinks1 a');
+    var ytLinks = [
+        'https://www.youtube.com/embed/3h1OGKttHJE', // 第一題的影片
+        'https://www.youtube.com/embed/A1n1xww4kJY', // 第二題的影片
+        'https://www.youtube.com/embed/gnJjkR7D5eo', // 第三題的影片
+    ];
+    
+    var titles = ['第一題', '第二題','組合']; // 題目標題
+    
+    links.forEach(function(link, index) {
+        createModelPart(index + 1, link.href, ytLinks[index % ytLinks.length], titles[index]); // 將標題傳遞進去
+    });
+}
+
+window.onload = initModelParts;  // 頁面加載時初始化所有模型
+</script><br />HW2_Exam << <a href='HW2_Exam.html'>Previous</a> <a href='HW3.html'>Next</a> >> HW3</div>
         
     <!-- footer -->
       <div class="container">
