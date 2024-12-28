@@ -1658,23 +1658,26 @@ window.onload = initModelParts;  // 頁面加載時初始化所有模型
 <p style="padding-left: 30px;">完成上述流程後, 請將 HW3 自評分數輸入 cad2024 自評表單中.</p>
 <h3>w16_exam2</h3>
 <p>零件檔案:<a href="/downloads/HW-.zip">w16_exam2</a></p>
+<p>
 <script src="/static/jsc3d.js" type="text/javascript"></script>
+</p>
 <!-- 模型連結 -->
-<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_w16_part1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_w16_part4.stl">模型2</a> <!-- 第二題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_w16_part6.stl">模型3</a> <!-- 第三題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_w16_part5.stl">模型4</a> <!-- 第四題的模型 --></div>
+<div id="modelLinks1" style="display: none;"><a href="https://s104.cycu.org/~41223131/41223131_w16_part1.stl">模型1</a> <!-- 第一題的模型 --> <a href="https://s104.cycu.org/~41223131/41223131_w16_part4.stl">模型2</a> <!-- 第二題的模型 --><a href="https://s104.cycu.org/~41223131/41223131_w16_part6.stl">模型3</a><a href="https://s104.cycu.org/~41223131/41223131_w16_part5.stl">模型2</a> <!-- 第二題的模型 --></div>
+<!-- 第二題的模型 -->
+<p></p>
 <!-- 動態生成的模型部分 -->
-<div id="modelParts1" style="display: flex; flex-wrap: wrap; gap: 20px;"></div>
+<div id="modelParts1"></div>
+<p>
 <script type="text/javascript">
 // 函數用來動態生成模型部件
-function createModelPart(index, url) {
+function createModelPart(index, url, ytUrl) {
     var modelPartDiv = document.createElement('div');
-    modelPartDiv.style.flex = "1 1 calc(50% - 20px)"; // 設定每個模型寬度為 50%，減去間距
-    modelPartDiv.style.boxSizing = "border-box";
     modelPartDiv.innerHTML = `
         <div id="models${index}">
-            <canvas height="300" id="cv${index}" style="border: 1px solid; width: 100%;"></canvas>
+            <canvas height="300" id="cv${index}" style="border: 1px solid;" width="400"></canvas>
         </div>
 
-        <div style="width: 400; height: 300; border: 1px solid; margin-bottom: 20px;">
+        <div style="width: 400px; height: 70px; border: 1px solid; margin-bottom: 20px;">
             Model Color:<input id="mdlClr${index}" onchange="changeOption${index}('ModelColor',this.value)" style="margin-right: 50px;" type="color" value="#00ff40">
             Back Color1:<input id="bckClr${index}_1" onchange="changeOption${index}('BackgroundColor1',this.value)" style="margin-right: 50px;" type="color">
             Back Color2:<input id="bckClr${index}_2" onchange="changeOption${index}('BackgroundColor2',this.value)" type="color"><br>
@@ -1741,14 +1744,16 @@ function createModelPart(index, url) {
 function initModelParts() {
     var links = document.querySelectorAll('#modelLinks1 a');
     links.forEach(function(link, index) {
-        createModelPart(index + 1, link.href); // 傳遞模型連結
+        createModelPart(index + 1, link.href, ''); // 影片部分刪除
     });
 }
 
 window.onload = initModelParts;  // 頁面加載時初始化所有模型
 </script>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="400" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/s3-BlPIupcU" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - w16_exam2: 41223131-2" width="600"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="400" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wa3kw0T_JD8" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - w16_exam2: 41223131-1" width="600"></iframe> <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="400" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/2Y8I3qzXCvo" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - w16_exam1: 41223131-3" width="600"></iframe></p><h1>HW4</h1>
+</p>
+<!-- 影片連結 -->
+<p></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wa3kw0T_JD8" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - w16_exam2: 41223131-1" width="560"></iframe><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/s3-BlPIupcU" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - w16_exam2: 41223131-2" width="560"></iframe><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/2Y8I3qzXCvo" title="國立虎尾科技大學機械設計工程系 - 電腦輔助設計與實習 - w16_exam1: 41223131-3" width="560"></iframe></p><h1>HW4</h1>
 <p>Homework 4 (20%):</p>
 <p style="padding-left: 30px;">建立 <a href="https://mde.tw/cad2024/content/Quadruped.html">Dingo 機器狗</a>控制系統設計模擬場景</p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecycu/DingoQuadruped">https://github.com/mdecycu/DingoQuadruped</a></p>
